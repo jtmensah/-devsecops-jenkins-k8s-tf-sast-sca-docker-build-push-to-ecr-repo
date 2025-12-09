@@ -1,9 +1,13 @@
 pipeline {
   agent any
+  environment {
+    IMAGE_REPO   = 'udemy/devsecops'                    
+    ECR_REGISTRY = '381491999288.dkr.ecr.us-east-1.amazonaws.com'
+  }
   tools { 
         maven 'Maven-Default'  
-    }
-   stages{
+  }
+  stages{
     stage('CompileandRunSonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=jm-devsecops_jm -Dsonar.organization=jm-devsecops -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=95979120b8a80dac31363d4c93425a0c40e05d7f'
@@ -22,7 +26,7 @@ pipeline {
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
-                 app =  docker.build("udemy/devsecops")
+                 app =  docker.build("${IMAGE_REPO}")
                  }
                }
             }
