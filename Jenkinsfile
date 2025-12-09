@@ -1,8 +1,11 @@
 pipeline {
   agent any
   environment {
-    IMAGE_REPO   = 'udemy/devsecops'                    
-    ECR_REGISTRY = '381491999288.dkr.ecr.us-east-1.amazonaws.com'
+    ECR_REGISTRY         = '381491999288.dkr.ecr.us-east-1.amazonaws.com'
+    IMAGE_REPO           = 'udemy/devsecops'
+    IMAGE_TAG            = 'latest'
+    JD_ID                = "${IMAGE_REPO}:${IMAGE_TAG}"
+    JD_TAGGED_IMAGE_NAME = "${ECR_REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}"
   }
   tools { 
         maven 'Maven-Default'  
