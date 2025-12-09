@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: asgbuggy
-        image: 381491999288.dkr.ecr.us-east-1.amazonaws.com/udemy/devsecops/asg
+        image: 381491999288.dkr.ecr.us-east-1.amazonaws.com/udemy/devsecops
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -36,4 +36,5 @@ spec:
   type: LoadBalancer
   selector:
     app: asgbuggy
+
 
