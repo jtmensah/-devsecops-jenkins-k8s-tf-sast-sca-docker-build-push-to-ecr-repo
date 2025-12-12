@@ -29,10 +29,10 @@ pipeline {
 
     stage('Compute Image Tag') {
       steps {
+        // write short git SHA to a temp file
+        sh 'git rev-parse --short HEAD > .gitsha'
         script {
-          // get short commit after checkout
-          def short = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-          env.IMAGE_TAG = "${env.BUILD_NUMBER}-${short}"
+          env.IMAGE_TAG = "${BUILD_NUMBER}-" + readFile('.gitsha').trim()
           echo "IMAGE_TAG=${env.IMAGE_TAG}"
         }
       }
