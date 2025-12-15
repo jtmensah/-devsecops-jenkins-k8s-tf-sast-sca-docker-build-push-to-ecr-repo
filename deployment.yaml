@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: asgbuggy
-        image: 381491999288.dkr.ecr.us-east-1.amazonaws.com/udemy/devsecops
+        ##image: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -36,5 +36,6 @@ spec:
   type: LoadBalancer
   selector:
     app: asgbuggy
+
 
 
