@@ -67,9 +67,10 @@ pipeline {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
           // If using the Maven plugin instead, swap to: mvn snyk:test -fn -Dsnyk.token=$SNYK_TOKEN
           sh '''
-            snyk auth "$SNYK_TOKEN"
-            snyk test --severity-threshold=high || true
-            snyk monitor || true
+            mvn snyk:test -fn -Dsnyk.token=$SNYK_TOKEN
+          //  snyk auth "$SNYK_TOKEN"
+          //  snyk test --severity-threshold=high || true
+          //  snyk monitor || true
           '''
         }
       }
